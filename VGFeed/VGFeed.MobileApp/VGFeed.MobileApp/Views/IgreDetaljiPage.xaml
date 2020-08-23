@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.IgreDetaljiPage"
+             xmlns:local="clr-namespace:VGFeed.MobileApp.Converters"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels"
+             Title="{Binding Igra.Naziv}">
+    <ContentPage.BindingContext>
+        <viewModel:IgreDetaljiViewModel>
+        </viewModel:IgreDetaljiViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
+            <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="WhiteSmoke">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                    <Image Source="{Binding Igra.SlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                    <Label Text="{Binding ProsjecnaOcjena, StringFormat='Prosječna ocjena: {0}'}" TextColor="Accent"></Label>
+                    <Label Text="{Binding Igra.MetacriticOcjena, StringFormat='Metacritic ocjena: {0}'}" TextColor="Accent"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="10">
+                    <Button Text="Odigrao/la sam igru" Padding="10" TextColor="Accent" IsVisible="{Binding DisableOdigrao}" Clicked="OdigraoButton_Clicked"></Button>
+                    <Label Text="Ova igra se nalazi u vašoj listi odigranih igara." IsVisible="{Binding TrenutniKorisnikIgre.Igrao}"></Label>
+                    <Button Text="Interesuje me igra" Padding="10" TextColor="Accent" IsVisible="{Binding DisableZainteresiran}" Command="{Binding ZainteresiranClickedCommand}"></Button>
+                    <Label Text="Ova igra se nalazi u vašoj listi igara koje vas interesuju." LineBreakMode="WordWrap" IsVisible="{Binding TrenutniKorisnikIgre.Zainteresiran}"></Label>
+                </StackLayout>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Vertical" Padding="10" BackgroundColor="WhiteSmoke">
+                    <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="WhiteSmoke">
+                        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                            <Label Text="{Binding Igra.PlatformNaziv, StringFormat='Platforma: {0}'}"></Label>
+                            <Label Text="{Binding Igra.ZanrNaziv, StringFormat='Žanr: {0}'}"></Label>
+                            <Label Text="{Binding Igra.DatumIzlaska, StringFormat='Datum izlaska: {0:d}'}"></Label>
+                            <Label Text="{Binding Igra.Developer, StringFormat='Developer: {0}'}"></Label>
+                            <Label Text="{Binding Igra.Izdavac, StringFormat='Izdavač: {0}'}"></Label>
+                        </StackLayout>
+                        <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                            <Label Text="{Binding Igra.OriginalnaCijena, StringFormat='Originalna cijena: {0:C}'}"></Label>
+                            <Label Text="{Binding Igra.TrenutnaCijena, StringFormat='Trenutna cijena: {0:C}'}"></Label>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Multiplayer"></Label>
+                                <Switch IsToggled="{Binding Igra.Multiplayer}" IsEnabled="False"></Switch>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <Label Text="{Binding Igra.Opis, StringFormat='Opis: {0}'}" LineBreakMode="WordWrap" TextColor="Accent"></Label>
+                </StackLayout>
+            </ScrollView>
+            <Label Text="Recenzije" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16" TextColor="Accent"></Label>
+            <ListView ItemsSource="{Binding IgraReviewOcjena}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <Label Text="{Binding KorisnikUsername, StringFormat='Korisnik {0}'}"
+                                 LineBreakMode="NoWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                <Label Text="{Binding Ocjena, StringFormat='Ocjena: {0:N0}'}"
+                                 LineBreakMode="NoWrap"
+                                 Style="{DynamicResource ListItemDetailTextStyle}"
+                                 FontSize="13">
+                                </Label>
+                                <Label Text="{Binding Recenzija, StringFormat='Recenzija: {0}'}"
+                                 LineBreakMode="WordWrap"
+                                 Style="{DynamicResource ListItemDetailTextStyle}"
+                                 FontSize="13">
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Slične igre" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16" TextColor="Accent"></Label>
+            <ListView ItemsSource="{Binding SlicneIgre}" ItemSelected="OnItemSelected" x:Name="listView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <StackLayout Orientation="Vertical" HorizontalOptions="Start">
+                                    <Label Text="{Binding Naziv, StringFormat=' {0}'}"
+                                 LineBreakMode="NoWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                    <Image Source="{Binding SlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                </StackLayout>
+                                <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                                    <Label Text="{Binding PlatformNaziv, StringFormat='Platforma: {0}'}"
+                                 LineBreakMode="NoWrap"
+                                 Style="{DynamicResource ListItemDetailTextStyle}"
+                                 FontSize="13">
+                                    </Label>
+                                    <Label Text="{Binding ZanrNaziv, StringFormat='Žanr: {0}'}"
+                                 LineBreakMode="WordWrap"
+                                 Style="{DynamicResource ListItemDetailTextStyle}"
+                                 FontSize="13">
+                                    </Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

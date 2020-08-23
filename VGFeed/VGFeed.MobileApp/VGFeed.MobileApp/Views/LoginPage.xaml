@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:VGFeed.MobileApp.ViewModels"
+             x:Class="VGFeed.MobileApp.Views.LoginPage">
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
+            <Label Text="Korisničko ime" HorizontalTextAlignment="Center" />
+            <Entry Text="{Binding Username}"></Entry>
+            <Label Text="Password"  HorizontalTextAlignment="Center"></Label>
+            <Entry Text="{Binding Password}" IsPassword="True"></Entry>
+            <Button Command="{Binding LoginCommand}" Text="Login" BackgroundColor="DeepSkyBlue" HorizontalOptions="FillAndExpand"></Button>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"></ActivityIndicator>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

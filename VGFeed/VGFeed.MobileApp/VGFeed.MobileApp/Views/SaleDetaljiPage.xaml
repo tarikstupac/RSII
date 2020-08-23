@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.SaleDetaljiPage"
+             xmlns:viewModels="clr-namespace:VGFeed.MobileApp.ViewModels"
+             xmlns:local="clr-namespace:VGFeed.MobileApp.Converters"
+             Title="Sale Detalji">
+    <ContentPage.BindingContext>
+        <viewModels:SaleDetaljiViewModel>
+        </viewModels:SaleDetaljiViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,100,100"></ActivityIndicator>
+            <StackLayout>
+                <ListView ItemsSource="{Binding SaleDetaljiList}" x:Name="listView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Horizontal">
+                                    <StackLayout>
+                                        <Image Source="{Binding IgraSlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical" Padding="10" HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke">
+                                        <Label Text="{Binding IgraNaziv}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                                        <Label Text="{Binding IgraPlatformNaziv, StringFormat='Platforma: {0}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                        <Label Text="{Binding IgraTrenutnaCijena, StringFormat='Cijena bez popusta: {0:C}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="{Binding Popust, StringFormat='Popust: {0:N0}%'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="{Binding Cijena, StringFormat='Cijena s popustom: {0:C}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="{Binding StoreLink, StringFormat='Link: {0}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="Fizička kopija?" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Switch IsEnabled="False" IsToggled="{Binding FizickaKopija}"></Switch>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

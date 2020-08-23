@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.KorisnikSocialsPage"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels"
+             Title="Korisnik Socials">
+    <ContentPage.BindingContext>
+        <viewModel:KorisnikSocialsViewModel>
+        </viewModel:KorisnikSocialsViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical" VerticalOptions="Fill" Padding="10">
+        <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" BackgroundColor="WhiteSmoke" Padding="10">
+                <Label Text="PSN Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.Psnname}" Keyboard="Text" Placeholder="PSN Ime" HorizontalOptions="Fill" Completed="PsnnameEntry_Completed"></Entry>
+                <Label Text="PSN Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.PsnprofilLink}" Keyboard="Text" Placeholder="PSN Profil Link" HorizontalOptions="Fill" Completed="PsnprofilLinkEntry_Completed"></Entry>
+                <Label Text="Xbox Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.XboxName}" Keyboard="Text" Placeholder="Xbox Ime" HorizontalOptions="Fill" Completed="XboxNameEntry_Completed"></Entry>
+                <Label Text="Xbox Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.XboxProfilLink}" Keyboard="Text" Placeholder="Xbox Profil Link" HorizontalOptions="Fill" Completed="XboxProfilLinkEntry_Completed"></Entry>
+                <Label Text="Steam Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.SteamName}" Keyboard="Text" Placeholder="Steam Ime" HorizontalOptions="Fill" Completed="SteamNameEntry_Completed"></Entry>
+                <Label Text="Steam Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.SteamProfilLink}" Keyboard="Text" Placeholder="Steam Profil Link" HorizontalOptions="Fill" Completed="SteamProfilLinkEntry_Completed"></Entry>
+                <Label Text="Discord Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.DiscordName}" Keyboard="Text" Placeholder="Discord Ime" HorizontalOptions="Fill" Completed="DiscordNameEntry_Completed"></Entry>
+                <Label Text="Epic Store Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.EpicStoreName}" Keyboard="Text" Placeholder="Epic Store Ime" HorizontalOptions="Fill" Completed="EpicStoreNameEntry_Completed"></Entry>
+                <Label Text="Epic Store Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.EpicStoreProfilLink}" Keyboard="Text" Placeholder="Epic Store Profil Link" HorizontalOptions="Fill" Completed="EpicStoreProfilLinkEntry_Completed"></Entry>
+                <Label Text="Origin Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.OriginName}" Keyboard="Text" Placeholder="Origin Ime" HorizontalOptions="Fill" Completed="OriginNameEntry_Completed"></Entry>
+                <Label Text="Origin Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.OriginProfilLink}" Keyboard="Text" Placeholder="Origin Profil Link" HorizontalOptions="Fill" Completed="OriginProfilLinkEntry_Completed"></Entry>
+                <Label Text="BattleNet Ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.BattleNetName}" Keyboard="Text" Placeholder="BattleNet Ime" HorizontalOptions="Fill" Completed="BattleNetNameEntry_Completed"></Entry>
+                <Label Text="BattleNet Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.BattleNetProfilLink}" Keyboard="Text" Placeholder="BattleNet Profil Link" HorizontalOptions="Fill" Completed="BattleNetProfilLinkEntry_Completed"></Entry>
+                <Label Text="Nintendo ime" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.NintendoName}" Keyboard="Text" Placeholder="Nintendo ime" HorizontalOptions="Fill" Completed="NintendoNameEntry_Completed"></Entry>
+                <Label Text="Nintendo Profil Link" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+                <Entry Text="{Binding TrenutniKorisnik.NintendoProfilLink}" Keyboard="Text" Placeholder="Nintendo Profil Link" HorizontalOptions="Fill" Completed="NintendoProfilLinkEntry_Completed"></Entry>
+                <Button Text="Sačuvaj" Clicked="SacuvajButton_Clicked" BorderColor="Accent" HorizontalOptions="CenterAndExpand"></Button>
+        </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

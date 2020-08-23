@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.KorisniciPage"
+             xmlns:viewModels="clr-namespace:VGFeed.MobileApp.ViewModels"
+             Title="Korisnici">
+    <ContentPage.BindingContext>
+        <viewModels:KorisniciViewModel>
+        </viewModels:KorisniciViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,100,100"></ActivityIndicator>
+            <StackLayout>
+                <SearchBar Placeholder="Username" SearchButtonPressed="SearchBar_SearchButtonPressed" HorizontalOptions="Fill"></SearchBar>
+                <Label Text="Drzave" FontSize="14"></Label>
+                <Picker ItemsSource="{Binding DrzaveList}" ItemDisplayBinding="{Binding Naziv}" SelectedItem="{Binding SelectedDrzava}"></Picker>
+                <ListView ItemsSource="{Binding KorisniciList}" ItemSelected="OnItemSelected" x:Name="listView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Vertical" BackgroundColor="WhiteSmoke">
+                                    <Label Text="{Binding Username}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" 
+                                           TextColor="Accent"/>
+                                    <Label Text="{Binding Ime}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding Prezime}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                    <Label Text="{Binding DatumRodjenja, StringFormat='Datum rođenja: {0:d}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.KorisniciDetaljiPage"
+             xmlns:local="clr-namespace:VGFeed.MobileApp.Converters"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels"
+             Title="{Binding Korisnik.Username}">
+    <ContentPage.BindingContext>
+        <viewModel:KorisniciDetaljiViewModel>
+        </viewModel:KorisniciDetaljiViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
+            <StackLayout Orientation="Horizontal" Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="WhiteSmoke">
+                <Button  BorderRadius="0"  Text="Pošalji poruku"  Clicked="Button_Clicked" HorizontalOptions="CenterAndExpand"/>
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                    <Label Text="{Binding Korisnik.Username, StringFormat='Username: {0}'}" TextColor="Accent" FontSize="16"></Label>
+                    <Label Text="{Binding Korisnik.Email, StringFormat='Email: {0}'}" TextColor="Accent"></Label>
+                    <Label Text="{Binding Korisnik.Spol, StringFormat='Spol: {0}'}" TextColor="Accent"></Label>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" Padding="10">
+                    <Label Text="{Binding Korisnik.DatumRodjenja, StringFormat='Datum rodjenja: {0:d}'}" TextColor="Accent"></Label>
+                    <Label Text="{Binding Korisnik.Ime, StringFormat='Ime: {0}'}" TextColor="Accent"></Label>
+                    <Label Text="{Binding Korisnik.Prezime, StringFormat='Prezime: {0}'}" TextColor="Accent"></Label>
+                </StackLayout>
+            </StackLayout>
+            <ScrollView>
+                <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="WhiteSmoke">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                        <Label Text="{Binding TrenutniKorisnikSocials.Psnname, StringFormat='PSN Ime: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.PsnprofilLink, StringFormat='PSN Link: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.XboxName, StringFormat='Xbox Tag: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.XboxProfilLink, StringFormat='Xbox Link: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.SteamName, StringFormat='Steam Ime: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.SteamProfilLink, StringFormat='Steam Link: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.DiscordName, StringFormat='Discord Ime: {0}'}"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" HorizontalOptions="End">
+                        <Label Text="{Binding TrenutniKorisnikSocials.EpicStoreName, StringFormat='Epic Store Ime: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.EpicStoreProfilLink, StringFormat='EpicStore Link: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.OriginName, StringFormat='Origin Ime: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.OriginProfilLink, StringFormat='Origin Link: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.BattleNetName, StringFormat='BattleNet Ime: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.BattleNetProfilLink, StringFormat='BattleNet Link: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.NintendoName, StringFormat='Nintendo Ime: {0}'}"></Label>
+                        <Label Text="{Binding TrenutniKorisnikSocials.NintendoProfilLink, StringFormat='Nintendo Link: {0}'}"></Label>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+            <Label Text="Igre koje ih interesuju" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16" TextColor="Accent"></Label>
+            <ListView ItemsSource="{Binding ZainteresiranIgre}" ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <StackLayout>
+                                    <Image Source="{Binding IgraSlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding IgraNaziv, StringFormat=' {0}'}"
+                                 LineBreakMode="WordWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                    <Label Text="{Binding IgraDeveloper, StringFormat='Developer: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding IgraIzdavac, StringFormat='Izdavač: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Label Text="Igre koje su odigrali" VerticalOptions="Center" HorizontalTextAlignment="Center" FontSize="16" TextColor="Accent"></Label>
+            <ListView ItemsSource="{Binding OdigraneIgre}" ItemSelected="OnItemSelected" x:Name="listView">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <StackLayout>
+                                    <Image Source="{Binding IgraSlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding IgraNaziv, StringFormat=' {0}'}"
+                                 LineBreakMode="WordWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                    <Label Text="{Binding IgraDeveloper, StringFormat='Developer: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding IgraIzdavac, StringFormat='Izdavač: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                   <Label Text="{Binding Ocjena, StringFormat='Ocjena: {0:N}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

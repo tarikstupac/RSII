@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.CoversationPage"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels"
+             Title="{Binding Korisnik.Username}">
+    <ContentPage.BindingContext>
+        <viewModel:ConversationViewModel></viewModel:ConversationViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="10" HorizontalOptions="CenterAndExpand" BackgroundColor="WhiteSmoke">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
+            <Label Text="Nema poruka između vas i ovog korisnika" TextColor="Accent" FontSize="Large" IsVisible="{Binding ShowNemaPoruka}" ></Label>
+            <ListView ItemsSource="{Binding SvePoruke}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <Label Text="{Binding Username, StringFormat=' {0}:'}"
+                                 LineBreakMode="NoWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                <Label Text="{Binding Poruka.Tekst}"
+                                 LineBreakMode="NoWrap"
+                                 Style="{DynamicResource ListItemDetailTextStyle}"
+                                 FontSize="13">
+                                </Label>
+                                <Label Text="{Binding Status}"
+                                 LineBreakMode="WordWrap"
+                                 Style="{DynamicResource ListItemDetailTextStyle}"
+                                 FontSize="10">
+                                </Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Entry x:Name="NovaPoruka" Placeholder="Unesite poruku..." Text="{Binding PorukaTekst}" HorizontalOptions="Fill"/>
+                <Button x:Name="Send_Button" BorderRadius="0" BackgroundColor="Accent"  Text="Send" Command="{Binding SendCommand}" Clicked="Send_Button_Clicked" HorizontalOptions="End"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

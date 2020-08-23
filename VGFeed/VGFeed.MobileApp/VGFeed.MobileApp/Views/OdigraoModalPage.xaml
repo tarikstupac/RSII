@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.OdigraoModalPage"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels"
+             Title="Odigao detalji">
+    <ContentPage.BindingContext>
+        <viewModel:OdigraoModalViewModel>
+        </viewModel:OdigraoModalViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Padding="10" BackgroundColor="WhiteSmoke">
+            <Label Text="Ocjena" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+            <Slider Value="{Binding TrenutniKorisnikIgre.Ocjena}" x:Name="slider"  Maximum="5" Minimum="1" ValueChanged="OcjenaSlider_ValueChanged" ></Slider>
+            <Label Text="{Binding Source={x:Reference slider},  Path=Value, StringFormat=' {0:N0}'}" FontSize="13" HorizontalTextAlignment="Center"></Label>
+            <Label Text="Posjedujete igru?" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+            <Switch IsToggled="{Binding TrenutniKorisnikIgre.PosjedujeIgru}" Toggled="PosjedujeSwitch_Toggled" ></Switch>
+            <Label Text="Recenzija igre:" FontSize="16" TextColor="Accent" HorizontalTextAlignment="Center"></Label>
+            <Editor Text="{Binding TrenutniKorisnikIgre.Recenzija}" Keyboard="Text" Placeholder="Recenzija" Completed="RecenzijaEditor_Completed" VerticalOptions="FillAndExpand"></Editor>
+            <Button Text="Sačuvaj" Clicked="SacuvajButton_Clicked" BorderColor="Accent" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

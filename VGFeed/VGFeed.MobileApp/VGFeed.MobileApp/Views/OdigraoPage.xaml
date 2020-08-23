@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.OdigraoPage"
+             xmlns:local="clr-namespace:VGFeed.MobileApp.Converters"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModel:OdigraoViewModel>
+        </viewModel:OdigraoViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
+            <Label Text="Trenutno nemate nijednu igru u listi odigranih igara!" IsVisible="{Binding ShowOdigrao}" FontSize="16" TextColor="Accent"></Label>
+            <ListView ItemsSource="{Binding KorisnikIgreList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <StackLayout>
+                                    <Image Source="{Binding IgraSlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                    <Button Text="Izmjeni" BorderColor="Accent" Clicked="IzmjeniButton_Clicked" HorizontalOptions="Center"></Button>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding IgraNaziv, StringFormat=' {0}'}"
+                                 LineBreakMode="WordWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                    <Label Text="{Binding IgraDeveloper, StringFormat='Developer: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding IgraIzdavac, StringFormat='Izdavač: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding Ocjena, StringFormat='Vaša ocjena: {0:N0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding Recenzija, StringFormat='Vaša recenzija: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="Posjedujete igru:" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Switch IsEnabled="False" IsToggled="{Binding PosjedujeIgru}"></Switch>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

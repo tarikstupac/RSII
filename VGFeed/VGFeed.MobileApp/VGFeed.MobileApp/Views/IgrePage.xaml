@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:VGFeed.MobileApp.ViewModels"
+             xmlns:local="clr-namespace:VGFeed.MobileApp.Converters"
+             x:Class="VGFeed.MobileApp.Views.IgrePage">
+    <ContentPage.BindingContext>
+        <viewModels:IgreViewModel>
+        </viewModels:IgreViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Title>Igre</ContentPage.Title>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.5,0.5,100,100"></ActivityIndicator>
+            <StackLayout>
+                <SearchBar Placeholder="Naziv" SearchButtonPressed="SearchBar_SearchButtonPressed" HorizontalOptions="Fill"></SearchBar>
+                <Label Text="Platforme" FontSize="14"></Label>
+                <Picker ItemsSource="{Binding PlatformeList}" ItemDisplayBinding="{Binding Naziv}" SelectedItem="{Binding SelectedPlatforma}"></Picker>
+                <Label Text="Žanrovi" FontSize="14"></Label>
+                <Picker ItemsSource="{Binding ZanroviList}" ItemDisplayBinding="{Binding Naziv}" SelectedItem="{Binding SelectedZanr}"></Picker>
+                <ListView ItemsSource="{Binding IgreList}" ItemSelected="OnItemSelected" x:Name="listView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="10" Orientation="Horizontal">
+                                    <StackLayout>
+                                        <Image Source="{Binding SlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                    </StackLayout>
+                                    <StackLayout Orientation="Vertical">
+                                        <Label Text="{Binding Naziv}" 
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemTextStyle}" 
+                                FontSize="16" />
+                                        <Label Text="{Binding PlatformNaziv, StringFormat='Platforma: {0}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                        <Label Text="{Binding ZanrNaziv, StringFormat='Žanr: {0}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="{Binding TrenutnaCijena, StringFormat='Cijena: {0:C}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="{Binding MetacriticOcjena, StringFormat='Metacritic ocjena: {0}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                        <Label Text="{Binding DatumIzlaska, StringFormat='Datum izlaska: {0:d}'}" 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" />
+                                    </StackLayout>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

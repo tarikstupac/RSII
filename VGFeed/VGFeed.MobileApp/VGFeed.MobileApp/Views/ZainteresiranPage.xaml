@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VGFeed.MobileApp.Views.ZainteresiranPage"
+             xmlns:local="clr-namespace:VGFeed.MobileApp.Converters"
+             xmlns:viewModel="clr-namespace:VGFeed.MobileApp.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModel:ZainteresiranViewModel>
+        </viewModel:ZainteresiranViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:ImageConverter x:Key="imgConv"></local:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"></ActivityIndicator>
+            <Label Text="Niste dodali nijednu igru u listu zainteresovanih igara. Da biste to uradili 
+                   na menu izaberite igre i nađite one koje vas interesuju te kliknite tipku interesuje me igra." 
+                   FontSize="16" LineBreakMode="WordWrap" HorizontalOptions="CenterAndExpand" IsVisible="{Binding ShowZainteresiran}"
+                   TextColor="Accent"></Label>
+            <ListView ItemsSource="{Binding KorisnikIgreList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Padding="10" BackgroundColor="GhostWhite">
+                                <StackLayout>
+                                    <Image Source="{Binding IgraSlikaThumb, Converter={StaticResource imgConv}}"></Image>
+                                </StackLayout>
+                                <StackLayout HorizontalOptions="StartAndExpand">
+                                    <Label Text="{Binding IgraNaziv, StringFormat=' {0}'}"
+                                 LineBreakMode="WordWrap" 
+                                 Style="{DynamicResource ListItemTextStyle}" 
+                                 FontSize="16"></Label>
+                                    <Label Text="{Binding IgraDeveloper, StringFormat='Developer: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Label Text="{Binding IgraIzdavac, StringFormat='Izdavač: {0}'}" 
+                                LineBreakMode="WordWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13"/>
+                                    <Button Text="Ukloni" BorderColor="Red" Clicked="UkloniButton_Clicked" HorizontalOptions="Center"></Button>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
