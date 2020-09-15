@@ -7,6 +7,6 @@ namespace VGFeed.WebAPI.Services
 {
     public interface IRecommendService<T>
     {
-         List<Model.Igre> GetSlicni(int id);
+         List<T> GetSlicni(int id);
     }
 }

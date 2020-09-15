@@ -43,10 +43,11 @@
             this.dodajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.izvještajiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.najaktivnijiKorisniciToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.najpopularnijeIgreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.najpopularnijeIgreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.topDonatoriToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.SuspendLayout();
@@ -156,7 +157,8 @@
             // 
             this.izvještajiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.najaktivnijiKorisniciToolStripMenuItem,
-            this.najpopularnijeIgreToolStripMenuItem});
+            this.najpopularnijeIgreToolStripMenuItem,
+            this.topDonatoriToolStripMenuItem});
             this.izvještajiToolStripMenuItem.Name = "izvještajiToolStripMenuItem";
             this.izvještajiToolStripMenuItem.Size = new System.Drawing.Size(141, 48);
             this.izvještajiToolStripMenuItem.Text = "Izvještaji";
@@ -167,6 +169,13 @@
             this.najaktivnijiKorisniciToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
             this.najaktivnijiKorisniciToolStripMenuItem.Text = "Najaktivniji Korisnici";
             this.najaktivnijiKorisniciToolStripMenuItem.Click += new System.EventHandler(this.najaktivnijiKorisniciToolStripMenuItem_Click);
+            // 
+            // najpopularnijeIgreToolStripMenuItem
+            // 
+            this.najpopularnijeIgreToolStripMenuItem.Name = "najpopularnijeIgreToolStripMenuItem";
+            this.najpopularnijeIgreToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
+            this.najpopularnijeIgreToolStripMenuItem.Text = "Najpopularnije Igre";
+            this.najpopularnijeIgreToolStripMenuItem.Click += new System.EventHandler(this.najpopularnijeIgreToolStripMenuItem_Click);
             // 
             // statusStrip
             // 
@@ -186,12 +195,12 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(98, 41);
             this.toolStripStatusLabel.Text = "Status";
             // 
-            // najpopularnijeIgreToolStripMenuItem
+            // topDonatoriToolStripMenuItem
             // 
-            this.najpopularnijeIgreToolStripMenuItem.Name = "najpopularnijeIgreToolStripMenuItem";
-            this.najpopularnijeIgreToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
-            this.najpopularnijeIgreToolStripMenuItem.Text = "Najpopularnije Igre";
-            this.najpopularnijeIgreToolStripMenuItem.Click += new System.EventHandler(this.najpopularnijeIgreToolStripMenuItem_Click);
+            this.topDonatoriToolStripMenuItem.Name = "topDonatoriToolStripMenuItem";
+            this.topDonatoriToolStripMenuItem.Size = new System.Drawing.Size(396, 46);
+            this.topDonatoriToolStripMenuItem.Text = "Top Donatori";
+            this.topDonatoriToolStripMenuItem.Click += new System.EventHandler(this.topDonatoriToolStripMenuItem_Click);
             // 
             // frmIndex
             // 
@@ -235,6 +244,7 @@
         private System.Windows.Forms.ToolStripMenuItem izvještajiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem najaktivnijiKorisniciToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem najpopularnijeIgreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem topDonatoriToolStripMenuItem;
     }
 }
 

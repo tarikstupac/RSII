@@ -82,6 +82,7 @@ namespace VGFeed.WebAPI
             services.AddScoped<IRecommendService<Model.Igre>,RecommendIgreService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IPorukeService, PorukeService>();
+            services.AddScoped<IRecommendService<Model.Korisnici>, RecommendKorisnikeService>();
 
             var connection = Configuration.GetConnectionString("VGFeed");
             services.AddDbContext<_3123Context>(options => options.UseSqlServer(connection));

@@ -9,5 +9,6 @@ namespace VGFeed.WebAPI.Services
     public interface IPaymentService
     {
         Model.Donacije Insert(DonacijeInsertRequest request);
+        List<Model.Donacije> Get(DonacijeSearchRequest search);
     }
 }

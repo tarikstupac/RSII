@@ -13,12 +13,14 @@ namespace VGFeed.MobileApp.ViewModels
     {
         private readonly APIService _korisnikService = new APIService("Korisnici");
         private readonly APIService _drzaveService = new APIService("Drzave");
+        private readonly APIService _recommendService = new APIService("SlicniKorisnici");
         Model.Drzave _selectedDrzava = null;
         public KorisniciViewModel()
         {
             InitCommand = new Command(async () => await Init());
         }
         public ObservableCollection<Model.Korisnici> KorisniciList { get; set; } = new ObservableCollection<Model.Korisnici>();
+        public ObservableCollection<Model.Korisnici> SlicniKorisnici { get; set; } = new ObservableCollection<Model.Korisnici>();
         public ObservableCollection<Model.Drzave> DrzaveList { get; set; } = new ObservableCollection<Model.Drzave>();
         public string UsernameSearch { get; set; }
         public ICommand InitCommand { get; private set; }
@@ -28,7 +30,7 @@ namespace VGFeed.MobileApp.ViewModels
             set
             {
                 SetProperty(ref _selectedDrzava, value);
-                if (value != null)
+                if (value != null && value.DrzavaId!=0)
                 {
                     InitCommand.Execute(null);
                 }
@@ -39,7 +41,8 @@ namespace VGFeed.MobileApp.ViewModels
         {
             IsBusy = true;
             KorisniciSearchRequest search = new KorisniciSearchRequest() { Username = UsernameSearch };
-            KorisniciList.Clear();           
+            KorisniciList.Clear();
+            SlicniKorisnici.Clear();
             if (DrzaveList.Count == 0)
             {
                 DrzaveList.Insert(0, new Model.Drzave() { DrzavaId = 0, Naziv = "Sve Države" });
@@ -50,7 +53,7 @@ namespace VGFeed.MobileApp.ViewModels
                 }
                 SelectedDrzava = DrzaveList[0];
             }
-            if (SelectedDrzava != null)
+            if (SelectedDrzava != null && SelectedDrzava.DrzavaId!=0)
             {
                 search.DrzavaId = SelectedDrzava.DrzavaId;
             }
@@ -61,6 +64,14 @@ namespace VGFeed.MobileApp.ViewModels
                 {
                     if (item.KorisnikId != APIService.KorisnikId)
                         KorisniciList.Add(item);
+                }
+            }
+            var slicniList = await _recommendService.GetSlicni<List<Model.Korisnici>>(APIService.KorisnikId);
+            if(slicniList.Count != 0)
+            {
+                foreach (var k in slicniList)
+                {
+                    SlicniKorisnici.Add(k);
                 }
             }
             IsBusy = false;

@@ -26,5 +26,10 @@ namespace VGFeed.WebAPI.Controllers
         {
             return _service.Insert(request);
         }
+        [HttpGet]
+        public List<Model.Donacije> Get([FromQuery]DonacijeSearchRequest search)
+        {
+            return _service.Get(search);
+        }
     }
 }

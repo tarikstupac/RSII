@@ -7,6 +7,7 @@ using VGFeed.Model;
 using VGFeed.Model.Requests;
 using VGFeed.WebAPI.Database;
 using Stripe;
+using Microsoft.EntityFrameworkCore;
 
 namespace VGFeed.WebAPI.Services
 {
@@ -19,6 +20,19 @@ namespace VGFeed.WebAPI.Services
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        public List<Model.Donacije> Get(DonacijeSearchRequest search)
+        {
+            var query = _context.Set<Database.Donacije>().Include(x => x.Korisnik).AsQueryable();
+            if (search.KorisnikId.HasValue && search.KorisnikId != 0)
+            {
+                query = query.Where(x => search.KorisnikId == x.KorisnikId);
+            }
+            var list = query.ToList();
+            list.GroupBy(x => x.KorisnikId);
+
+            return _mapper.Map<List<Model.Donacije>>(list);
         }
 
         public Model.Donacije Insert(DonacijeInsertRequest request)

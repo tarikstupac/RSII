@@ -170,5 +170,11 @@ namespace VGFeed.WinUI
             Izvjestaji.NajpopularnijeIgre frm = new Izvjestaji.NajpopularnijeIgre();
             frm.Show();
         }
+
+        private void topDonatoriToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Izvjestaji.TopDonatori frm = new Izvjestaji.TopDonatori();
+            frm.Show();
+        }
     }
 }
