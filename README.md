@@ -12,7 +12,8 @@ username : mobile
 
 password : test
 
-##About
+## About
+
 This project is made in C# using .NET Core and contains a WebAPI, Xamarin Forms app and a WinForms app for administration.
 
 Entity Framework Core is used as an ORM, and the project also uses libraries like Swagger and AutoMapper.
